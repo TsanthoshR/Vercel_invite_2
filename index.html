@@ -7,6 +7,16 @@
 <meta name="description" content="Wedding of Theodosia and Santhosh, Monday 28 December 2026, Kattuvilai.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Theodosia &amp; Santhosh</title>
+<meta name="description" content="Wedding of Theodosia and Santhosh, Monday 28 December 2026, Kattuvilai.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -168,10 +178,270 @@
   .invite { margin: 1.2rem 0 0; font-size: 1rem; color: var(--ink); }
   .note { margin: 2rem 0 0; color: var(--muted); font-size: 1rem; }
   .closing { margin: 2rem 0 0; font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-size: 1.25rem; color: var(--ink); }
+  :root {
+    --mist: #E9E4D6;
+    --betel-deep: #2B1A3D;
+    --plum-deep: #2B1A3D;
+    --plum: #42265A;
+    --plum-light: #553273;
+    --marigold: #E8A23A;
+    --marigold-hover: #F1B150;
+    --on-envelope: #F5EEFA;
+    --serif: "Bodoni Moda", Didot, Georgia, serif;
+    --sans: "Jost", system-ui, sans-serif;
+    --rule: #d8c9a6;
+  }
+  /* Envelope stage ---------- */
+  .stage {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: calc(env(safe-area-inset-top, 0px) + 1.5rem) 1.25rem calc(env(safe-area-inset-bottom, 0px) + 1.5rem);
+    background-color: var(--mist);
+    overflow: hidden;
+    transition: background-color .8s ease, opacity .55s ease;
+  }
+  .stage-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+    padding-top: 9vh;
+  }
+  .env {
+    position: relative;
+    width: min(84vw, 28rem);
+    aspect-ratio: 1.4 / 1;
+    perspective: 1400px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .env-back {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: var(--plum-deep);
+    border-radius: 5px;
+    box-shadow: 0 2.25rem 3.5rem -1.5rem rgba(14, 28, 19, .5);
+    transition: transform .6s cubic-bezier(.5, 0, .75, 0), opacity .5s ease;
+  }
+
+  .card {
+    position: absolute;
+    left: 5%;
+    right: 5%;
+    top: 6%;
+    height: 88%;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .6em;
+    padding: 6% 8%;
+    text-align: center;
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .14), 0 .5rem 1.25rem -.5rem rgba(0, 0, 0, .25);
+    font-size: clamp(.62rem, 2.6vw, .82rem);
+    transition: transform 1s cubic-bezier(.2, .7, .2, 1), box-shadow .6s ease;
+  }
+  .card p { margin: 0; }
+  .card-lead, .card-date { color: var(--muted); }
+  .card-names { font-family: var(--serif); font-size: 2.2em; line-height: 1.1; text-wrap: balance; }
+
+  .pocket {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+    transition: transform .6s cubic-bezier(.5, 0, .75, 0), opacity .5s ease;
+  }
+  .pocket-sides {
+    position: absolute;
+    inset: 0;
+    background: var(--plum);
+    border-radius: 0 0 5px 5px;
+    clip-path: polygon(0 0, 50% 54%, 100% 0, 100% 100%, 0 100%);
+  }
+  .pocket-bottom-wrap { position: absolute; inset: 0; filter: drop-shadow(0 -1px 1.5px rgba(0, 0, 0, .25)); }
+  .pocket-bottom {
+    position: absolute;
+    inset: 0;
+    background: var(--plum-light);
+    border-radius: 0 0 5px 5px;
+    clip-path: polygon(0 100%, 50% 50%, 100% 100%);
+  }
+
+  .flap {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 58%;
+    z-index: 5;
+    transform-origin: 50% 0;
+    transform-style: preserve-3d;
+    pointer-events: none;
+    transition: transform .7s cubic-bezier(.45, .05, .25, 1), opacity .5s ease;
+  }
+  .flap-face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+  .flap-face span { position: absolute; inset: 0; clip-path: polygon(0 0, 100% 0, 50% 100%); }
+  .flap-outer { filter: drop-shadow(0 2px 2.5px rgba(0, 0, 0, .3)); }
+  .flap-outer span { background: var(--plum); }
+  .flap-inner { transform: rotateX(180deg); opacity: 0; }
+  .flap-inner span {
+    background:
+      radial-gradient(circle, rgba(255, 255, 255, .55) 1.1px, transparent 1.6px) 0 0 / 10px 10px,
+      var(--marigold);
+  }
+
+  .seal {
+    position: absolute;
+    left: 50%;
+    top: 58%;
+    z-index: 6;
+    width: clamp(4.25rem, 22%, 6.25rem);
+    aspect-ratio: 1;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: none;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .seal:focus-visible { outline-offset: 6px; border-radius: 50%; }
+  .seal-half { position: absolute; inset: 0; transition: transform .55s cubic-bezier(.3, .6, .4, 1), opacity .45s ease; }
+  .seal-half svg { display: block; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 3px 3px rgba(40, 24, 4, .35)); }
+  .seal-left { clip-path: polygon(0 0, 53% 0, 47% 22%, 55% 41%, 46% 60%, 54% 79%, 49% 100%, 0 100%); }
+  .seal-right { clip-path: polygon(53% 0, 100% 0, 100% 100%, 49% 100%, 54% 79%, 46% 60%, 55% 41%, 47% 22%); }
+
+  .env-to {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 8%;
+    z-index: 5;
+    margin: 0;
+    text-align: center;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(.9rem, 3.8vw, 1.15rem);
+    color: var(--on-envelope);
+    pointer-events: none;
+    transition: opacity .35s ease;
+  }
+  .stage-hint { margin: 0; color: var(--muted); font-size: .95rem; transition: opacity .35s ease; }
+  .stage-skip {
+    padding: .25rem .5rem;
+    border: 0;
+    background: none;
+    color: var(--muted);
+    font-size: .95rem;
+    text-decoration: underline;
+    text-underline-offset: .25em;
+    text-decoration-thickness: 1px;
+    cursor: pointer;
+    transition: opacity .35s ease;
+  }
+
+  /* Opening sequence */
+  .is-cracking .seal { pointer-events: none; }
+  .is-cracking .seal-left { transform: translate(-22%, 26%) rotate(-26deg); opacity: 0; }
+  .is-cracking .seal-right { transform: translate(22%, 30%) rotate(22deg); opacity: 0; }
+  .is-cracking .env-to, .is-cracking .stage-hint, .is-cracking .stage-skip { opacity: 0; pointer-events: none; }
+  .is-flap-open .flap { transform: rotateX(180deg); }
+  .is-flap-open .flap-outer { opacity: 0; transition: opacity 0s linear .33s; }
+  .is-flap-open .flap-inner { opacity: 1; transition: opacity 0s linear .33s; }
+  .is-flap-behind .flap { z-index: 2; }
+  .is-card-out .card { transform: translateY(-48%); }
+  .is-dropping .pocket, .is-dropping .env-back { transform: translateY(35%); opacity: 0; }
+  .is-dropping .flap { transform: translateY(35%) rotateX(180deg); opacity: 0; }
+  .stage.is-settling { background-color: var(--paper); }
+  .is-settling .card {
+    z-index: 7;
+    transform: translateY(0) scale(1.06);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+  .stage.is-gone { opacity: 0; pointer-events: none; }
+  .is-resetting, .is-resetting * { transition: none !important; animation: none !important; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .seal { animation: breathe 2.8s ease-in-out infinite; }
+    .is-cracking .seal { animation: none; }
+  }
+  @keyframes breathe {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.045); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .stage *, .stage *::before, .stage *::after { transition: none !important; animation: none !important; }
+    .stage { transition: opacity .25s ease; }
+  }
+
+  /* ---------- Invitation ---------- */
+
 </style>
-</head>
-<body>
-<main>
+<body class="is-locked">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <radialGradient id="wax" cx="36%" cy="30%" r="78%">
+      <stop offset="0" stop-color="#F7CB78"/>
+      <stop offset=".45" stop-color="#E8A23A"/>
+      <stop offset=".85" stop-color="#C47F20"/>
+      <stop offset="1" stop-color="#A26615"/>
+    </radialGradient>
+    <filter id="rough" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="7" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <symbol id="seal-art" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="44" fill="url(#wax)" filter="url(#rough)"/>
+      <circle cx="50" cy="50" r="31" fill="none" stroke="#B9791D" stroke-width="2.2" opacity=".75"/>
+      <circle cx="50.8" cy="50.8" r="31" fill="none" stroke="#FBD89A" stroke-width="1" opacity=".5"/>
+      <text x="50.7" y="58.7" text-anchor="middle" font-family="'Bodoni Moda', Didot, Georgia, serif" font-size="23" fill="#FBD89A" opacity=".6">S&amp;T</text>
+      <text x="50" y="58" text-anchor="middle" font-family="'Bodoni Moda', Didot, Georgia, serif" font-size="23" fill="#A96A16">S&amp;T</text>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="stage" id="stage">
+  <div class="stage-inner">
+    <div class="env" id="env">
+      <div class="env-back"></div>
+      <div class="card" aria-hidden="true">
+        <p class="card-lead">Together with their families</p>
+        <p class="card-names">Theodosia &amp; Santhosh</p>
+        <p class="card-date">28 December 2026</p>
+      </div>
+      <div class="pocket" aria-hidden="true">
+        <div class="pocket-sides"></div>
+        <div class="pocket-bottom-wrap"><div class="pocket-bottom"></div></div>
+      </div>
+      <div class="flap" aria-hidden="true">
+        <div class="flap-face flap-outer"><span></span></div>
+        <div class="flap-face flap-inner"><span></span></div>
+      </div>
+      <p class="env-to" id="envTo">For you</p>
+      <button class="seal" id="seal" type="button" aria-label="Open the invitation">
+        <span class="seal-half seal-left"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#seal-art"/></svg></span>
+        <span class="seal-half seal-right"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#seal-art"/></svg></span>
+      </button>
+    </div>
+    <p class="stage-hint">Tap the seal to open</p>
+    <button class="stage-skip" id="skipBtn" type="button" hidden>Skip to the details</button>
+  </div>
+</div>
+
+
+<main class="invite" id="invite" inert>
   <p class="verse">&ldquo;Many waters cannot quench love; rivers cannot sweep it away.&rdquo;<span class="attrib">Song of Solomon 8:7</span></p>
 
   <div class="rule"></div>
@@ -209,5 +479,61 @@
 
   <p class="closing">Your gracious presence and blessings are cordially requested.</p>
 </main>
+<script>
+(() => {
+  "use strict";
+  const $ = (id) => document.getElementById(id);
+  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const reduceMotion = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+
+  const params = new URLSearchParams(window.location.search);
+  const guest = (params.get("to") || "").replace(/\s+/g, " ").trim().slice(0, 60);
+  $("envTo").textContent = guest ? `For ${guest}` : "For you";
+
+  const stage = $("stage");
+  const env = $("env");
+  const seal = $("seal");
+  const skipBtn = $("skipBtn");
+  const invite = $("invite");
+
+  let seen = false;
+  try { seen = localStorage.getItem("invite-opened") === "1"; } catch (e) { /* storage unavailable */ }
+  if (seen) skipBtn.hidden = false;
+
+  let opening = false;
+
+  async function openEnvelope() {
+    if (opening) return;
+    opening = true;
+    if (reduceMotion) { reveal(); return; }
+    stage.classList.add("is-cracking");
+    await wait(380);
+    stage.classList.add("is-flap-open");
+    await wait(720);
+    stage.classList.add("is-flap-behind", "is-card-out");
+    await wait(1050);
+    stage.classList.add("is-dropping");
+    await wait(450);
+    stage.classList.add("is-settling");
+    await wait(850);
+    reveal();
+  }
+
+  function reveal() {
+    opening = true;
+    try { localStorage.setItem("invite-opened", "1"); } catch (e) { /* storage unavailable */ }
+    window.scrollTo(0, 0);
+    invite.inert = false;
+    document.body.classList.remove("is-locked");
+    stage.classList.add("is-gone");
+    setTimeout(() => { if (stage.classList.contains("is-gone")) stage.hidden = true; }, reduceMotion ? 260 : 600);
+  }
+
+  seal.addEventListener("click", (e) => { e.stopPropagation(); openEnvelope(); });
+  env.addEventListener("click", openEnvelope);
+  skipBtn.addEventListener("click", reveal);
+})();
+</script>
 </body>
 </html>
