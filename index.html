@@ -20,23 +20,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ivory: #fbf8f1;
-    --paper: #f5efe2;
-    --ink: #3a3a33;
-    --muted: #6b6a5d;
-    --sage: #8a9a84;
-    --gold: #b8924a;
-    --line: #d8c9a6;
+    --ivory: #faf7fc;
+    --paper: #f3edf8;
+    --ink: #2b1a3d;
+    --muted: #6b5a7a;
+    --sage: #7d6a92;
+    --gold: #6f3f94;
+    --line: #d6c4e4;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --ivory: #1f2420; --paper: #262c26; --ink: #efe8d6; --muted: #bdb59b;
-      --sage: #9db095; --gold: #d8b06a; --line: #4a4a3c;
+      --ivory: #1d1526; --paper: #271d33; --ink: #efe6f7; --muted: #bfb0d0;
+      --sage: #b7a3cf; --gold: #c9a6e8; --line: #4a3a5e;
     }
   }
   :root[data-theme="dark"] {
-    --ivory: #1f2420; --paper: #262c26; --ink: #efe8d6; --muted: #bdb59b;
-    --sage: #9db095; --gold: #d8b06a; --line: #4a4a3c;
+    --ivory: #1d1526; --paper: #271d33; --ink: #efe6f7; --muted: #bfb0d0;
+    --sage: #b7a3cf; --gold: #c9a6e8; --line: #4a3a5e;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; }
@@ -179,17 +179,17 @@
   .note { margin: 2rem 0 0; color: var(--muted); font-size: 1rem; }
   .closing { margin: 2rem 0 0; font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-size: 1.25rem; color: var(--ink); }
   :root {
-    --mist: #E9E4D6;
+    --mist: #ECE4F3;
     --betel-deep: #2B1A3D;
     --plum-deep: #2B1A3D;
     --plum: #42265A;
     --plum-light: #553273;
-    --marigold: #E8A23A;
-    --marigold-hover: #F1B150;
+    --marigold: #b08fd0;
+    --marigold-hover: #c6a9e0;
     --on-envelope: #F5EEFA;
     --serif: "Bodoni Moda", Didot, Georgia, serif;
     --sans: "Jost", system-ui, sans-serif;
-    --rule: #d8c9a6;
+    --rule: #d6c4e4;
   }
   /* Envelope stage ---------- */
   .stage {
@@ -436,7 +436,7 @@
       </button>
     </div>
     <p class="stage-hint">Tap the seal to open</p>
-    <button class="stage-skip" id="skipBtn" type="button" hidden>Skip to the details</button>
+    <button class="stage-skip" id="skipBtn" type="button">Skip to the details</button>
   </div>
 </div>
 
@@ -499,7 +499,6 @@
 
   let seen = false;
   try { seen = localStorage.getItem("invite-opened") === "1"; } catch (e) { /* storage unavailable */ }
-  if (seen) skipBtn.hidden = false;
 
   let opening = false;
 
